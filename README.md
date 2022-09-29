@@ -55,7 +55,7 @@ You should see output similar to the following
 
 ### Cloud Run - Microservices
 
-## **NOTE:** You need to create an artifact registry for this part of the project and set the good IAM role to push artifacts
+## **NOTE:** You need to create an artifact registry named `docker` for this part of the project and set the good IAM role to push artifacts
 
 ### To create a Docker image for the microservices, you will have to create a Docker image for each service. Execute the following commands for each folder under the microservices folder
 
@@ -64,28 +64,28 @@ You should see output similar to the following
 
 ```bash
 cd src/products
-docker build -t europe-west1-docker.pkg.dev/gil-prepare-insa/docker/products:1.0.0 .
+docker build -t europe-west1-docker.pkg.dev/gil-go-to-micro/docker/products:1.0.0 .
 
 cd ../orders
-docker build -t europe-west1-docker.pkg.dev/gil-prepare-insa/docker/orders:1.0.0 .
+docker build -t europe-west1-docker.pkg.dev/gil-go-to-micro/docker/orders:1.0.0 .
 ```
 
 ### To push Docker images for the microservices, you will have to execute the following instructions
 
 ```bash
-gcloud auth login --project gil-prepare-insa
+gcloud auth login --project gil-go-to-micro
 gcloud auth configure-docker europe-west1-docker.pkg.dev
 cd ../products
-docker push europe-west1-docker.pkg.dev/gil-prepare-insa/docker/products:1.0.0
+docker push europe-west1-docker.pkg.dev/gil-go-to-micro/docker/products:1.0.0
 cd ../orders
-docker push europe-west1-docker.pkg.dev/gil-prepare-insa/docker/orders:1.0.0
+docker push europe-west1-docker.pkg.dev/gil-go-to-micro/docker/orders:1.0.0
 ```
 
 ### To deploy cloud run services, follow these instructions
 
 ```bash
-gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-prepare-insa/docker/products:1.0.0 --platform managed --region europe-west1
-gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-prepare-insa/docker/orders:1.0.0 --platform managed --region europe-west1
+gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-go-to-micro/docker/products:1.0.0 --platform managed --region europe-west1
+gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-go-to-micro/docker/orders:1.0.0 --platform managed --region europe-west1
 ```
 
 ### To finish, configure, build and deploy frontend
@@ -105,9 +105,9 @@ Finally, build the project and push it
 cd ../../../react-app
 npm run build
 cd ../microservices/src/frontend
-docker build -t europe-west1-docker.pkg.dev/gil-prepare-insa/docker/frontend:1.0.0 .
-docker push europe-west1-docker.pkg.dev/gil-prepare-insa/docker/frontend:1.0.0
-gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-prepare-insa/docker/frontend:1.0.0 --platform managed --region europe-west1
+docker build -t europe-west1-docker.pkg.dev/gil-go-to-micro/docker/frontend:1.0.0 .
+docker push europe-west1-docker.pkg.dev/gil-go-to-micro/docker/frontend:1.0.0
+gcloud run deploy --image=europe-west1-docker.pkg.dev/gil-go-to-micro/docker/frontend:1.0.0 --platform managed --region europe-west1
 ```
 
 ### Then remove deployed resources
