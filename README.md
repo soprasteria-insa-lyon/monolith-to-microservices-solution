@@ -12,7 +12,7 @@
 ### **NOTE:** Make sure you have a WSL installed (`wsl.exe`) to start bash command
 
 ```bash
-git clone https://github.com/googlecodelabs/monolith-to-microservices
+git clone https://github.com/soprasteria-insa-lyon/monolith-to-microservices-solution
 cd monolith-to-microservices
 ./setup.sh
 ```
